@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hailaran</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="img/favicon.ico"
+      type="image/vnd.microsoft.icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!----------------------------------------------------------------------->
+    <!-- HEADER {{{ -->
+    <!----------------------------------------------------------------------->
+    <header class="main-header">
+      <nav class="main-navigation">
+        <a href="index.html" class="main-header-logo">
+          <img
+            src="img/logotipo2.png"
+            width="268"
+            height="153"
+            alt="Logotipo Hailaran"
+          />
+        </a>
+        <div class="main-navigation-wrapper">
+          <div class="container">
+            <ul class="site-navigation">
+              <li><a href="#info-point">Informacion</a></li>
+              <li><a href="#news-point">Noticias</a></li>
+              <li><a href="price.html">Precio</a></li>
+              <li><a href="catalog.html">Merchandising</a></li>
+              <li><a href="#contacts-point">Contacto</a></li>
+            </ul>
+            <ul class="user-navigation">
+              <li>
+                <a class="login-link" href="login.html">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- }}} -->
+    <!--------------------------------------------------------------------- -->
+
+    <main class="container">
+      <h1 class="visually-hidden">Hailaran</h1>
+
+      <!----------------------------------------------------------------------->
+      <!-- THREE LOGOS {{{ -->
+      <!----------------------------------------------------------------------->
+      <section class="features" id="info-point">
+        <h2 class="visually-hidden">Cousas que facer</h2>
+        <!-- HIDDEN -->
+        <ul class="features-list">
+          <li class="feature-item">
+            <h3>Pensa</h3>
+            <p style="font-size: 60pt; margin-bottom: 20pt">
+              <i class="fa-solid fa-brain"></i>
+            </p>
+            <p>Pensa cos teus amiguis</p>
+          </li>
+          <li class="feature-item">
+            <h3>Disfruta</h3>
+            <p style="font-size: 60pt; margin-bottom: 20pt">
+              <i class="fa-solid fa-face-grin-stars"></i>
+            </p>
+            <p>Disfruta cos teus amiguis</p>
+          </li>
+          <li class="feature-item">
+            <h3>Comparte</h3>
+            <p style="font-size: 60pt; margin-bottom: 20pt">
+              <i class="fa-solid fa-handshake"></i>
+            </p>
+            <p>Comparte momentos cos teus amiguis</p>
+          </li>
+        </ul>
+      </section>
+      <!-- }}} -->
+      <!--------------------------------------------------------------------- -->
+
+      <!----------------------------------------------------------------------->
+      <!-- NEWS and ALUMINI {{{ -->
+      <!----------------------------------------------------------------------->
+
+      <div class="index-columns">
+        <section class="news" id="news-point">
+          <h2>Novas</h2>
+          <ul class="news-list">
+            <li class="news-item">
+              <p>Primeira version da web de Hailaran</p>
+              <time datetime="2024-04-23">23 de abril</time>
+            </li>
+            <li class="news-item">
+              <p>Ola amiguis</p>
+              <time datetime="2024-04-22">24 de abril</time>
+            </li>
+          </ul>
+          <a class="button" href="#">Ver máis</a>
+        </section>
+
+        <section class="gallery">
+          <h2>Escapistas anteriores</h2>
+          <div class="gallery-container">
+            <figure class="gallery-content">
+              <a href="#"
+                ><img
+                  src="img/lram.png"
+                  width="286"
+                  height="164"
+                  alt="Lucia, Ruben, Alba e Marcos"
+              /></a>
+            </figure>
+            <button class="button gallery-button gallery-button-back" disabled>
+              Atras
+            </button>
+            <button class="button gallery-button gallery-button-next">
+              Seguite
+            </button>
+          </div>
+          <h3>ti podes ser un deles</h3>
+        </section>
+      </div>
+
+      <!-- }}} -->
+      <!--------------------------------------------------------------------- -->
+
+      <!----------------------------------------------------------------------->
+      <!-- INFO e RESERVA {{{ -->
+      <!----------------------------------------------------------------------->
+      <div class="index-columns">
+        <section class="contacts" id="contacts-point">
+          <h2>Onde estamos</h2>
+          <p>
+            Estrada Rio Cobo San Cibrao<br />
+            27891 Cervo<br />
+            Telefono: +34XXXXXXXXX
+          </p>
+          <p>
+            Horario:<br />
+            Luns a venres: 10:00 ate 22:00<br />
+            Sabados: 10:00 ate 19:00<br />
+            Domingos: pechado
+          </p>
+          <a class="button contacts-button contacts-button-map" href="map.html"
+            >Ubicación</a
+          >
+          <a class="button contacts-button" href="#">blah blah</a>
+        </section>
+
+        <section class="appointment">
+          <h2>Reserva</h2>
+          <p class="appointment-info">
+            Reserva a tua blah blha blah blah blah blah blah blha blah blah
+          </p>
+          <form class="appointment-form" action="#" method="post">
+            <p class="appointment-item">
+              <label for="appointment-date">Data</label>
+              <input
+                id="appointment-date"
+                type="text"
+                name="date"
+                value=""
+                placeholder="01/07/2024"
+              />
+            </p>
+            <p class="appointment-item">
+              <label for="appointment-time">Hora</label>
+              <input
+                id="appointment-time"
+                type="text"
+                name="time"
+                value=""
+                placeholder="16:00"
+              />
+            </p>
+            <p class="appointment-item">
+              <label for="appointment-name">Nome</label>
+              <input
+                id="appointment-name"
+                type="text"
+                name="name"
+                value=""
+                placeholder="Maria Garcia Lopez"
+              />
+            </p>
+            <p class="appointment-item">
+              <label for="appointment-phone">Telefono</label>
+              <input
+                id="appointment-phone"
+                type="tel"
+                name="phone"
+                placeholder="+34678912345"
+              />
+            </p>
+            <button class="button" type="submit">Reservar!</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p class="footer-contacts">
+          Sargadelos<br />
+          27891 Cervo<br />
+          Telefono: +34XXXXXXXXX
+        </p>
+        <div class="footer-social">
+          <b>As nosas redes</b>
+          <ul>
+            <li>
+              <a class="social-button" href="LINKTOWHATSAPP"
+                ><span class="visually-hidden">WhatsApp</span>
+                <span style="font-size: 20pt; color: #ffffff">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="social-button" href="GOTOFACEBOOK">
+                <span class="visually-hidden">Facebook</span>
+                <span style="font-size: 20pt; color: #ffffff">
+                  <i class="fa-brands fa-facebook"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="social-button" href="GOTOINSTAGRAM.COM">
+                <span class="visually-hidden">Instagram</span>
+                <span style="font-size: 20pt; color: #ffffff">
+                  <i class="fa-brands fa-instagram"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <p class="footer-copyright">
+          <b>Repositorio</b>
+          <a class="button" href="http://github.com/marromlam">Github</a>
+        </p>
+      </div>
+    </footer>
+
+    <section class="modal modal-map">
+      <h2 class="visually-hidden">A nosa ubicacion</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2886.4016917092968!2d-7.407050565211!3d43.660614990898544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ses!4v1713801245859!5m2!1sen!2ses"
+        width="766"
+        height="560"
+        allowfullscreen
+      ></iframe>
+      <p>
+        <img
+          src="img/sargadelos.png"
+          width="766"
+          height="560"
+          alt="Sargadelos"
+        />
+      </p>
+      <button class="modal-close" type="button">Sair</button>
+    </section>
+
+    <script src="js/popup.js"></script>
+  </body>
+</html>
+
+<!--vim: fdm=marker -->
