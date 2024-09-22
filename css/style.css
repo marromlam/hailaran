@@ -6,9 +6,9 @@ body {
   font-size: 14px;
   line-height: 24px;
   font-weight: 700;
-  color: #ffffff;
+  color: #000000;
   text-transform: uppercase;
-  background-color: #000000;
+  background-color: #ffffff;
   background-image: url("../img/fondo_pagina_w.jpg");
   background-position: top center;
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@ input[type="radio"].visually-hidden {
 }
 
 .inner-page {
-  color: #000000;
+  color: #ffffff;
   background-color: #f9f6f3;
   background-image: url("../img/pattern-light.jpg");
   background-position: 0 0;
@@ -48,7 +48,7 @@ input[type="radio"].visually-hidden {
 
 .inner-page .main-header {
   margin-bottom: 50px;
-  background-color: #000000;
+  background-color: #ffffff;
 }
 
 a {
@@ -71,7 +71,7 @@ a {
 .button:hover,
 .button:focus,
 .button:active {
-  background-color: #663d15;
+  background-color: #663df5;
 }
 
 .button.disabled,
@@ -87,7 +87,7 @@ a {
   align-items: center;
   font-size: 16px;
   line-height: 20px;
-  color: #ffffff;
+  color: #000000;
   background-color: transparent;
 }
 
@@ -98,6 +98,7 @@ a {
 
 .main-navigation .container {
   display: flex;
+  background-color: #ffffff;
 }
 
 .main-header-logo {
@@ -116,7 +117,7 @@ a {
 .main-navigation-wrapper {
   width: 100%;
   margin-bottom: 35px;
-  background-color: #000000;
+  background-color: #ffffff;
 }
 
 .main-navigation-wrapper .container {
@@ -151,18 +152,20 @@ a {
 .user-navigation a {
   display: block;
   padding: 25px 20px;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .site-navigation a:hover,
 .site-navigation a:focus,
 .user-navigation a:hover,
 .user-navigation a:focus {
-  background-color: #242424;
+  background-color: #cccccc;
 }
 
 .site-navigation-current {
   position: relative;
+  background-color: #ffffff;
 }
 
 .site-navigation-current a[href] {
@@ -180,7 +183,7 @@ a {
   bottom: 0;
   left: 20px;
   height: 5px;
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 .user-navigation .login-link {
@@ -908,11 +911,12 @@ a {
 .main-footer {
   margin-top: 65px;
   padding: 60px 0;
-  color: #ffffff;
+  color: #000000;
+  background-color: #ffffff;
   border-color: #212121;
-  background-image: url("../img/pattern-dark.jpg");
-  background-position: 0 0;
-  background-repeat: repeat;
+  /* background-image: url("../img/pattern-dark.jpg"); */
+  /* background-position: 0 0; */
+  /* background-repeat: repeat; */
 }
 
 .inner-page .main-footer {
@@ -930,7 +934,7 @@ a {
 }
 
 .footer-contacts a {
-  color: #ffffff;
+  color: #000000;
   text-decoration: underline;
 }
 
@@ -970,7 +974,7 @@ a {
 
 .social-button:hover,
 .social-button:focus {
-  background-color: #ffffff;
+  background-color: #cccccc;
 }
 
 .social-button:hover path,
@@ -997,8 +1001,8 @@ a {
 
 .footer-copyright .button:hover,
 .footer-copyright .button:focus {
-  color: #000000;
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #000000;
 }
 
 @keyframes bounce {
