@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test redsys insite</title>
+    <script src="https://sis-t.redsys.es:25443/sis/NC/sandbox/redsysV2.js"></script>
+    <!-- <script src="https://sis-t.redsys.es:25443/sis/NC/sandbox/redsysV3.js"></script> -->
+</head>
+<body>
+    <div id="card-form" style="height: 400px"></div>
+    <form name="datos">
+        <input type="hidden" id="token"></input>
+        <input type="hidden" id="errorCode"></input>
+        <a href="javascript:alert(document.datos.token.value + '--' + document.datos.errorCode.value)"> ver</a>
+    </form>
+
+    <script>
+        function merchantValidationEjemplo(){
+        //Insertar validaciones…
+        return true;
+        }
+        <!-- Listener -->
+        window.addEventListener("message", function receiveMessage(event) {
+            storeIdOper(event,"token", "errorCode", merchantValidationEjemplo);
+        });
+        <!-- Petición de carga de iframe -->
+            var estiloBoton = ''
+            var estiloBody = ''
+            var estiloCaja = ''
+            var estiloInputs = ''
+            <!-- Petición de carga de iframe clásica -->
+            getInSiteForm('card-form', estiloBoton, estiloBody, estiloCaja, estiloInputs, 'Pagar 60', '999008881', '1', 'F8OYDISB16DA',true, false, 'twoRows');
+    </script>
+</body>
+
+</html>
