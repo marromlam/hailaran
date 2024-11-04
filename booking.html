@@ -6,71 +6,11 @@
   <body style="background-color: #cccccc">
     <iframe
       id="myiframe"
-      src="https://script.google.com/a/*/macros/s/AKfycby5U5QnY9YBvsUDg2qiBJFIlbjynAO_DhGlJsR77IY-SLuWbhmB1s67Rzu46bRuWeK7/exec"
+      src="https://script.google.com/a/*/macros/s/AKfycbzTZmaNaGZEIxs869qHP9JyaL7aayqPOxLZNVPpwrW_ncPCLrHWxA9mZG7AfZ_-HTI4/exec"
       frameborder="0"
       style="overflow: hidden; height: 100%; width: 100%"
       height="100%"
       width="100%"
     ></iframe>
-
-
-
-    <div id="card-form" style="height: 400px"></div>
-    <form name="datos">
-        <input type="hidden" id="token"></input>
-        <input type="hidden" id="errorCode"></input>
-        <a href="javascript:alert(document.datos.token.value + '--' + document.datos.errorCode.value)"> ver</a>
-    </form>
-
-    <script>
-        function merchantValidationEjemplo() {
-            //Insertar validaciones…
-            //alert("Esto son validaciones propias");
-            return true;
-        }
- 
-
-        window.addEventListener("message", function receiveMessage(event) {
-            storeIdOper(event,"token", "errorCode", merchantValidationEjemplo);
-        });
-
-
-
-        // function pedido() {
-        //     return "pedido" + Math.floor((Math.random() * 1000) + 1);
-        // }
-        // 
-        // var insiteJSON = {
-        //     "id" : "card-form",
-        //     "fuc" : "999008881",
-        //     "terminal" : "1",
-        //     "order" : pedido(),
-        //     "estiloInsite" : "twoRows"
-        // }
-            var estiloBoton = ''
-            var estiloBody = ''
-            var estiloCaja = ''
-            var estiloInputs = ''
-        
-        //getInSiteForm('card-form', estiloBoton, estiloBody, estiloCaja, estiloInputs, 'Pagar 60', '169043676', '100', 'pedido1', "1", "0", 'twoRows');
-          getInSiteForm('card-form', 
-            estiloBoton, estiloBody, estiloCaja, estiloInputs, 
-            'Pagar 60', 
-            '169043676', 
-            '100', 
-            'pedido1',
-            "1", "0", 'twoRows'
-          );
-        //getInSiteFormJSON(insiteJSON);
-
-    </script>
-
-
-
-
-
-
-
   </body>
-
 </html>
