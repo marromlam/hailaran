@@ -211,7 +211,8 @@ a {
 }
 
 .container {
-  max-width: 940px;
+  max-width: 900px;
+  min-width: 450px;
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -928,7 +929,7 @@ a {
 }
 
 .footer-contacts {
-  width: 320px;
+  width: 750px;
   margin: 0;
   margin-right: 70px;
 }
@@ -944,7 +945,7 @@ a {
 }
 
 .footer-social {
-  width: 145px;
+  width: 150px;
   text-align: center;
 }
 
