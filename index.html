@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Hailaran</title>
     <link
       href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp"
@@ -20,8 +20,27 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
   <script src="https://www.instagram.com/embed.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("navigation.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("nav-placeholder").innerHTML = data;
+                });
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer-placeholder").innerHTML = data;
+                });
+        });
+    </script>
+
   <!-- <script type="text/javascript" src="https://www.embedista.com/j/instagramfeed1707.js"></script> -->
   </head>
+
   <body>
     <!----------------------------------------------------------------------->
     <!-- HEADER {{{ -->
@@ -37,19 +56,8 @@
           />
         </a>
 
-        <div class="main-navigation-wrapper">
-          <div class="container">
-            <ul class="site-navigation">
-              <li><a href="#info-point">Inicio</a></li>
-              <!-- <li><a href="#news-point">Noticias</a></li> -->
-              <!-- <li><a href="price.html">Precio</a></li> -->
-              <li><a href="booking.html">Reserva</a></li>
-              <!-- <li><a href="#booking-point">Reserva</a></li> -->
-              <!-- <li><a href="catalog.html">Merchandising</a></li> -->
-              <li><a href="coupons.html">Bonos regalo</a></li>
-              <!-- <li><a href="#contacts-point">Contacto</a></li> -->
-            </ul>
-          </div>
+        <div class="main-navigation-wrapper" id="nav-placeholder">
+
         </div>
 
       </nav>
@@ -107,6 +115,7 @@
           <i>(Nivel de dificultad: fácil)</i>
           </p>
           <a href="booking.html" style="color:#ffffff"><button class="button" type="submit">Reserva</button></a>
+          <a href="coupon.html" style="color:#ffffff"><button class="button" type="submit">Regala</button></a>
         </section>
 
         <section class="news">
@@ -221,8 +230,8 @@
           <!-- <button class="button" type="submit"><a href="booking.html" style="color:#ffffff">Reserva</a></button> -->
           <!-- <p>La reserva no es reembolsable</p>  -->
           <!-- </form> -->
-          <h2>Bono regalo</h2>
-          <p >Ponte en <a href="booking.html" style="color:#663df5">contacto</a> con nosotros/as para regalar experiencias en nuestra sala o en nuestros talleres!</p>
+          <!-- <h2>Bono regalo</h2> -->
+          <!-- <p >Ponte en <a href="booking.html" style="color:#663df5">contacto</a> con nosotros/as para regalar experiencias en nuestra sala o en nuestros talleres!</p> -->
 
 
           <!-- <li>Consigue tu equipo de entre 2 a 4 personas.</li> -->
@@ -245,51 +254,8 @@
 
     </main>
 
-    <footer class="main-footer">
-      <div class="container">
-        <p class="footer-contacts">
-          Estrada Rio Cobo San Cibrao, Sargadelos<br />
-          27891 Cervo<br />
-          Teléfono: +34673057329</br>
-          <a class="button contacts-button contacts-button-map" href="https://maps.app.goo.gl/SVBxE7BPc489HnFH7" ><span style="color:#ffffff">Ubicación</span></a>
-          <!-- <a class="button" href="http://github.com/marromlam">Github</a> -->
-        </p>
-        <div class="footer-social">
-          <b>As nosas redes</b></br>
-          <ul>
-            <li>
-              <a class="social-button" href="https://wa.me/34673057329"
-                ><span class="visually-hidden">WhatsApp</span>
-                <span style="font-size: 20pt; color: #ffffff">
-                  <i class="fa-brands fa-whatsapp"></i>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="social-button" href="GOTOFACEBOOK">
-                <span class="visually-hidden">Facebook</span>
-                <span style="font-size: 20pt; color: #ffffff">
-                  <i class="fa-brands fa-facebook"></i>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="social-button" href="https://www.instagram.com/hailaran.xogo">
-                <span class="visually-hidden">Instagram</span>
-                <span style="font-size: 20pt; color: #ffffff">
-                  <i class="fa-brands fa-instagram"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <p class="footer-copyright">
-          &nbsp;</br>
-          &nbsp;</br>
-          &nbsp;</br>
-          <a class="button" href="http://github.com/marromlam">Github</a>
-        </p>
-      </div>
+    <footer class="main-footer" id="footer-placeholder">
+
     </footer>
 
     <section class="modal modal-map">
@@ -310,8 +276,6 @@
       </p>
       <button class="modal-close" type="button">Sair</button>
     </section>
-
-    <script src="js/popup.js"></script>
   </body>
 </html>
 

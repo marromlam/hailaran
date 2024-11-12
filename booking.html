@@ -1,15 +1,67 @@
-<html>
+<!doctype html>
+<html lang="es">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hailaran</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="img/favicon.ico"
+      type="image/vnd.microsoft.icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("navigation.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("nav-placeholder").innerHTML = data;
+                });
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer-placeholder").innerHTML = data;
+                });
+        });
+    </script>
   </head>
+
   <body style="background-color: #cccccc">
+    <!----------------------------------------------------------------------->
+    <!-- HEADER {{{ -->
+    <!----------------------------------------------------------------------->
+    <header class="main-header">
+      <nav class="main-navigation">
+        <div class="main-navigation-wrapper" id="nav-placeholder"> <div>
+      </nav>
+    </header>
+    <!-- }}} -->
+    <!--------------------------------------------------------------------- -->
+
     <iframe
-      id="myiframe"
+      id="myIframe"
       src="https://script.google.com/a/*/macros/s/AKfycbxAKfFM9QMvnbsIXw7DJ3_8NUah7ylv_wtdyAR6uRr1uCFVzVzvsn27izAy7kemvJAW/exec"
       frameborder="0"
-      style="overflow: hidden; height: 100%; width: 100%"
-      height="100%"
-      width="100%"
+      style="width: 100%;height:1800px"
     ></iframe>
+
+
+
+    <footer class="main-footer" id="footer-placeholder">
+
+    </footer>
+
   </body>
 </html>
