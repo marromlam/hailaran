@@ -1,13 +1,37 @@
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      iframe {
-  -webkit-overflow-scrolling: touch;
-}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hailaran</title>
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp" rel="stylesheet" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("navigation.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("nav-placeholder").innerHTML = data;
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+    });
     </script>
   </head>
   <body style="background-color: #cccccc">
+  <header class="main-header">
+    <nav class="main-navigation">
+      <div class="main-navigation-wrapper" id="nav-placeholder">
+        <div>
+    </nav>
+  </header>
     <iframe
       id="myiframe"
 src="https://script.google.com/macros/s/AKfycbzXu1hbQDerCsfheft9PdPeKt7bJCEbYej_LiZeVY_gYe-_cYhLq013rPm2Mu0H8uQi/exec"
@@ -16,5 +40,6 @@ src="https://script.google.com/macros/s/AKfycbzXu1hbQDerCsfheft9PdPeKt7bJCEbYej_
       height="100%"
       width="100%"
     ></iframe>
+  <footer class="main-footer" id="footer-placeholder"> </footer>
   </body>
 </html>
