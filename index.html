@@ -27,6 +27,16 @@
         });
     });
   </script>
+  
+
+
+<script>
+  function openExternal() {
+    window.open('https://example.com', '_blank'); // Opens in a new tab or external browser
+  }
+</script>
+  
+  
 </head>
 
 <body>
@@ -84,6 +94,8 @@
 
       <div class="news">
         <h2>¿Qué somos?</h2>
+        
+          <button onclick="openExternal()">Open in External Browser</button>
         <p>Somos una sala de escape room y un espacio creativo que ofrece
           alternativas de ocio en A Mariña Lucense (Norte de la provincia
           de Lugo)</p>
@@ -204,7 +216,7 @@
           Un día, estando de celebración, descubrieron el secreto de su felicidad... </br>
           <i>(Nivel de dificultad: fácil)</i>
         </p>
-        <a href="booking.html" style="color:#ffffff"><button class="button" type="submit">Reserva</button></a>
+        <a href="booking.html" target=_blank style="color:#ffffff"><button class="button" type="submit">Reserva</button></a>
         <span>&nbsp;</span>
         <a href="coupons.html" style="color:#ffffff"><button class="button" type="submit">Regala</button></a>
       </div>
