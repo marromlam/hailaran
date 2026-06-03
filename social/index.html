@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hailaran</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hailaran" />
+  <meta property="og:description" content="Descubre Hailaran" />
+  <meta property="og:url" content="https://hailaran.es/social" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #888;
+      text-align: center;
+      max-width: 28ch;
+      line-height: 1.5;
+    }
+
+    a.btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: #ffffff;
+      color: #0d0d0d;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: opacity 0.15s;
+    }
+
+    a.btn:hover { opacity: 0.85; }
+  </style>
+
+  <script>
+    (function () {
+      var dest = "https://hailaran.es";
+      var ua = navigator.userAgent || "";
+
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        window.location.href = "x-safari-https://hailaran.es";
+      } else if (/Android/i.test(ua)) {
+        window.location.href =
+          "intent://hailaran.es#Intent;scheme=https;package=com.android.chrome;end";
+      } else {
+        window.location.href = dest;
+      }
+    })();
+  </script>
+</head>
+<body>
+  <h1>Hailaran</h1>
+  <p>Abriendo en tu navegador&hellip;</p>
+  <a class="btn" href="https://hailaran.es">Abrir Hailaran ↗</a>
+</body>
+</html>
