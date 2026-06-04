@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Hailaran</title>
 
   <!-- Open Graph -->
@@ -10,9 +10,6 @@
   <meta property="og:description" content="Descubre Hailaran" />
   <meta property="og:url" content="https://hailaran.es/social" />
   <meta property="og:type" content="website" />
-
-  <!-- HTML-level redirect attempt for iOS — different WKWebView code path than JS -->
-  <meta http-equiv="refresh" content="0;url=x-safari-https://hailaran.es" id="metaRefresh" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,9 +63,7 @@
       to   { opacity: 1; transform: scale(1); }
     }
 
-    .alert-body {
-      padding: 1.2rem 1rem 0.9rem;
-    }
+    .alert-body { padding: 1.2rem 1rem 0.9rem; }
 
     .alert-title {
       font-size: 1rem;
@@ -85,8 +80,7 @@
 
     .spinner {
       display: inline-block;
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       border: 2px solid rgba(255,255,255,0.2);
       border-top-color: #fff;
       border-radius: 50%;
@@ -97,10 +91,7 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .alert-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.1);
-    }
+    .alert-divider { height: 1px; background: rgba(255,255,255,0.1); }
 
     .alert-actions { display: flex; flex-direction: column; }
 
@@ -131,17 +122,9 @@
       padding: 0.9rem 1rem;
       border-top: 1px solid rgba(255,255,255,0.1);
     }
-
     #qrWrap.show { display: flex; }
-
-    #qrWrap p {
-      font-size: 0.72rem;
-      color: #888;
-    }
-
-    #qr img {
-      border-radius: 8px;
-    }
+    #qrWrap p { font-size: 0.72rem; color: #888; }
+    #qr img { border-radius: 8px; }
   </style>
 </head>
 <body>
@@ -155,7 +138,7 @@
           <span class="spinner"></span>Abriendo en Safari
         </div>
         <div class="alert-msg" id="alertMsg">
-          Intentando abrir Hailaran en tu navegador…
+          Acepta la descarga que aparece para abrir en Safari…
         </div>
       </div>
       <div class="alert-divider"></div>
@@ -163,7 +146,6 @@
         <a id="openLink" href="https://hailaran.es" class="alert-btn bold">Abrir ahora ↗</a>
         <button class="alert-btn" id="copyBtn" style="display:none" onclick="copyLink()">Copiar enlace</button>
       </div>
-      <!-- QR shown after redirect attempts fail -->
       <div id="qrWrap">
         <p>O escanea con tu cámara</p>
         <div id="qr"></div>
@@ -175,15 +157,9 @@
   <script>
     (function () {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
-      var isIOS       = /iPhone|iPad|iPod/i.test(ua);
+      var isIOS       = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
       var isAndroid   = /Android/i.test(ua);
-      var isInstagram = /Instagram/i.test(ua);
-
-      // Remove meta-refresh on non-iOS so it doesn't affect Android/desktop
-      if (!isIOS) {
-        var mr = document.getElementById("metaRefresh");
-        if (mr) mr.parentNode.removeChild(mr);
-      }
+      var isInstagram = (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
 
       var backdrop = document.getElementById("alertBackdrop");
       var openLink = document.getElementById("openLink");
@@ -195,24 +171,27 @@
         backdrop.classList.add("show");
         openLink.href = "x-safari-https://hailaran.es";
 
-        // Attempt 1: Chrome (window.open uses a different WKWebView delegate path)
-        window.open("googlechromes://hailaran.es");
-        window.location.href = "googlechromes://hailaran.es";
+        // Primary trick: fake data: download forces iOS to offer "Open in Safari".
+        // When the user accepts, Safari opens this same /social URL.
+        // In Safari isInstagram is false, so the page auto-redirects to hailaran.es.
+        var dl = document.createElement("a");
+        dl.href = "data:application/octet-stream,";
+        dl.download = "abrir_en_safari.txt";
+        document.body.appendChild(dl);
+        dl.click();
+        document.body.removeChild(dl);
 
-        // Attempt 2: Safari scheme
+        // Backup: URL schemes (Chrome then Safari)
+        window.location.href = "googlechromes://hailaran.es";
         setTimeout(function () {
-          window.open("x-safari-https://hailaran.es");
           window.location.href = "x-safari-https://hailaran.es";
         }, 500);
 
-        // After 1.5 s both attempts have had time to work; if still here show fallbacks
+        // After 2 s: if still here update copy + QR fallbacks
         setTimeout(function () {
           alertMsg.textContent =
-            "Instagram bloqueó la apertura automática. " +
-            "Toca “Abrir ahora” o usa ··· → Abrir en navegador externo.";
+            "Toca "Abrir ahora" o usa ··· → Abrir en navegador externo.";
           copyBtn.style.display = "block";
-
-          // Render QR code
           try {
             var qr = qrcode(0, "M");
             qr.addData("https://hailaran.es");
@@ -220,7 +199,7 @@
             document.getElementById("qr").innerHTML = qr.createImgTag(4, 8);
             qrWrap.classList.add("show");
           } catch (e) {}
-        }, 1500);
+        }, 2000);
 
       } else if (isAndroid && isInstagram) {
         var dest = "intent://hailaran.es/#Intent;scheme=https;" +
@@ -229,6 +208,7 @@
         openLink.href = dest;
         window.location.href = dest;
       } else {
+        // Arrived in a real browser (e.g. Safari opened from the download prompt)
         window.location.href = "https://hailaran.es";
       }
     })();
@@ -237,9 +217,7 @@
       var url = "https://hailaran.es";
       var btn = document.getElementById("copyBtn");
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(function () {
-          btn.textContent = "¡Enlace copiado!";
-        });
+        navigator.clipboard.writeText(url).then(function () { btn.textContent = "¡Enlace copiado!"; });
       } else {
         var ta = document.createElement("textarea");
         ta.value = url; ta.style.cssText = "position:fixed;opacity:0";
