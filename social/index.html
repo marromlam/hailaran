@@ -158,9 +158,13 @@
         // Show the alert immediately
         backdrop.classList.add("show");
         openLink.href = "x-safari-https://hailaran.es";
-        // Attempt auto-redirect
-        window.location.href = "x-safari-https://hailaran.es";
-        // After 1.5 s, update message if still here (redirect was blocked)
+        // Try Chrome first; if not installed it fails silently
+        window.location.href = "googlechromes://hailaran.es";
+        // After 500 ms try Safari scheme as backup
+        setTimeout(function () {
+          window.location.href = "x-safari-https://hailaran.es";
+        }, 500);
+        // After 1.5 s, update message if still here (both redirects blocked)
         setTimeout(function () {
           alertMsg.textContent =
             "Instagram bloqueó la apertura automática. " +
