@@ -37,22 +37,26 @@
 
     a.btn {
       display: inline-block;
-      padding: 1rem 2.5rem;
+      padding: 1.1rem 2.8rem;
       background: #ffffff;
       color: #0d0d0d;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 700;
       text-decoration: none;
       border-radius: 999px;
-      transition: opacity 0.15s;
+      /* pulse animation to draw the eye */
+      animation: pulse 1.8s ease-in-out infinite;
     }
 
-    a.btn:hover { opacity: 0.85; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
+      50%       { box-shadow: 0 0 0 14px rgba(255,255,255,0); }
+    }
 
     p {
       font-size: 0.85rem;
-      color: #666;
-      max-width: 28ch;
+      color: #555;
+      max-width: 26ch;
       line-height: 1.5;
     }
   </style>
@@ -61,30 +65,26 @@
     document.addEventListener("DOMContentLoaded", function () {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       var btn = document.getElementById("openBtn");
-      var dest;
 
       if (/iPhone|iPad|iPod/i.test(ua)) {
-        dest = "x-safari-https://www.hailaran.es";
+        // Instagram's iOS WebView blocks all automatic URL-scheme redirects.
+        // Only a real user tap works — set the href and let the user tap.
+        btn.href = "x-safari-https://www.hailaran.es";
       } else if (/Android/i.test(ua)) {
-        dest = "intent://www.hailaran.es/#Intent;scheme=https;" +
-               "package=com.android.chrome;" +
-               "S.browser_fallback_url=https%3A%2F%2Fwww.hailaran.es;end";
+        var dest = "intent://www.hailaran.es/#Intent;scheme=https;" +
+                   "package=com.android.chrome;" +
+                   "S.browser_fallback_url=https%3A%2F%2Fwww.hailaran.es;end";
+        btn.href = dest;
+        window.location.href = dest; // works automatically on Android
       } else {
-        dest = "https://www.hailaran.es";
+        window.location.href = "https://www.hailaran.es";
       }
-
-      // Point the button at the right destination before the user taps it
-      btn.href = dest;
-
-      // Also attempt an automatic redirect (blocked by some Instagram versions)
-      window.location.href = dest;
     });
   </script>
 </head>
 <body>
   <h1>Hailaran</h1>
-  <!-- href is overwritten by JS; this is the safe fallback -->
-  <a id="openBtn" href="https://www.hailaran.es" class="btn">Abrir Hailaran ↗</a>
-  <p>Toca el botón si no eres redireccionado automáticamente.</p>
+  <a id="openBtn" href="https://www.hailaran.es" class="btn">Abrir en Safari ↗</a>
+  <p>Instagram bloquea la apertura automática. Toca el botón para continuar.</p>
 </body>
 </html>
