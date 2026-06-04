@@ -1,29 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Redirect</title>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Check if the user is using an iPhone
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hailaran</title>
 
-            if (/iPhone/i.test(userAgent)) {
-                // Redirect to the iPhone-specific URL
-                window.location.href = "x-safari-https://www.hailaran.es";
-            } else {
-                // Redirect to the generic URL
-                window.location.href = "https://www.hailaran.es";
-            }
-        });
-    </script>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hailaran" />
+  <meta property="og:description" content="Descubre Hailaran" />
+  <meta property="og:url" content="https://hailaran.es/social" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.75rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    /* Instruction card — shown on iOS Instagram only */
+    .card {
+      display: none;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      max-width: 320px;
+      text-align: left;
+    }
+
+    .card.visible { display: block; }
+
+    .card .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+
+    .card ol {
+      padding-left: 1.2rem;
+      color: #ccc;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .card ol li { margin-bottom: 0.1rem; }
+
+    .card .dots {
+      display: inline-block;
+      background: #333;
+      border-radius: 6px;
+      padding: 0 6px;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      vertical-align: middle;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    a.btn, button.btn {
+      display: block;
+      width: 100%;
+      padding: 0.95rem 1.5rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+
+    a.btn:hover, button.btn:hover { opacity: 0.85; }
+
+    .btn-primary   { background: #fff;  color: #0d0d0d; }
+    .btn-secondary { background: #222; color: #fff; border: 1px solid #444; }
+
+    .copy-feedback {
+      font-size: 0.8rem;
+      color: #4caf50;
+      min-height: 1.2em;
+    }
+  </style>
 </head>
-
 <body>
-    <p>Si no eres redireccionado, <a href="x-safari-https://www.hailaran.es">clica aquí para iPhone</a> o <a
-            href="https://www.hailaran.es">aqui para Android</a>.</p>
-</body>
+  <h1>Hailaran</h1>
 
+  <!-- Shown only on iOS Instagram -->
+  <div class="card" id="iosCard">
+    <div class="label">Abre en Safari</div>
+    <ol>
+      <li>Toca <span class="dots">···</span> abajo a la derecha</li>
+      <li>Selecciona <strong>"Abrir en navegador externo"</strong></li>
+    </ol>
+  </div>
+
+  <div class="btn-row">
+    <!-- Primary: Chrome on iOS / direct link otherwise -->
+    <a id="openBtn" href="https://hailaran.es" class="btn btn-primary">Abrir Hailaran ↗</a>
+    <!-- Secondary: copy URL to clipboard (iOS Instagram) -->
+    <button class="btn btn-secondary" id="copyBtn" style="display:none"
+            onclick="copyLink()">Copiar enlace</button>
+  </div>
+  <p class="copy-feedback" id="copyFeedback"></p>
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isIOS       = /iPhone|iPad|iPod/i.test(ua);
+      var isAndroid   = /Android/i.test(ua);
+      var isIGBrowser = /Instagram/i.test(ua);
+
+      var openBtn  = document.getElementById("openBtn");
+      var copyBtn  = document.getElementById("copyBtn");
+      var iosCard  = document.getElementById("iosCard");
+
+      if (isIOS && isIGBrowser) {
+        // x-safari-https:// was removed by Instagram — show manual instructions
+        iosCard.classList.add("visible");
+        copyBtn.style.display = "block";
+        // Still try Chrome as an automatic escape hatch
+        openBtn.href = "googlechromes://hailaran.es";
+        openBtn.textContent = "Abrir en Chrome ↗";
+        window.location.href = "googlechromes://hailaran.es";
+      } else if (isIOS) {
+        window.location.href = "https://hailaran.es";
+      } else if (isAndroid && isIGBrowser) {
+        var dest = "intent://hailaran.es/#Intent;scheme=https;" +
+                   "package=com.android.chrome;" +
+                   "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
+        openBtn.href = dest;
+        window.location.href = dest;
+      } else {
+        window.location.href = "https://hailaran.es";
+      }
+    })();
+
+    function copyLink() {
+      var url = "https://hailaran.es";
+      var feedback = document.getElementById("copyFeedback");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          feedback.textContent = "¡Enlace copiado! Pégalo en Safari.";
+        });
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = url;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand("copy"); feedback.textContent = "¡Enlace copiado! Pégalo en Safari."; }
+        catch (e) { feedback.textContent = "Copia este enlace: " + url; }
+        document.body.removeChild(ta);
+      }
+    }
+  </script>
+</body>
 </html>
