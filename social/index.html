@@ -44,7 +44,6 @@
       font-weight: 700;
       text-decoration: none;
       border-radius: 999px;
-      /* pulse animation to draw the eye */
       animation: pulse 1.8s ease-in-out infinite;
     }
 
@@ -67,24 +66,23 @@
       var btn = document.getElementById("openBtn");
 
       if (/iPhone|iPad|iPod/i.test(ua)) {
-        // Instagram's iOS WebView blocks all automatic URL-scheme redirects.
-        // Only a real user tap works — set the href and let the user tap.
-        btn.href = "x-safari-https://www.hailaran.es";
+        btn.href = "x-safari-https://hailaran.es";
+        window.location.href = "x-safari-https://hailaran.es";
       } else if (/Android/i.test(ua)) {
-        var dest = "intent://www.hailaran.es/#Intent;scheme=https;" +
+        var dest = "intent://hailaran.es/#Intent;scheme=https;" +
                    "package=com.android.chrome;" +
-                   "S.browser_fallback_url=https%3A%2F%2Fwww.hailaran.es;end";
+                   "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
         btn.href = dest;
-        window.location.href = dest; // works automatically on Android
+        window.location.href = dest;
       } else {
-        window.location.href = "https://www.hailaran.es";
+        window.location.href = "https://hailaran.es";
       }
     });
   </script>
 </head>
 <body>
   <h1>Hailaran</h1>
-  <a id="openBtn" href="https://www.hailaran.es" class="btn">Abrir en Safari ↗</a>
-  <p>Instagram bloquea la apertura automática. Toca el botón para continuar.</p>
+  <a id="openBtn" href="https://hailaran.es" class="btn">Abrir en Safari ↗</a>
+  <p>Toca el botón si no eres redireccionado automáticamente.</p>
 </body>
 </html>
