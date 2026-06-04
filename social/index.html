@@ -23,8 +23,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.5rem;
       padding: 2rem;
+      text-align: center;
     }
 
     h1 {
@@ -34,38 +35,56 @@
       color: #ffffff;
     }
 
-    p {
-      font-size: 1rem;
-      color: #888;
-      text-align: center;
-      line-height: 1.6;
+    a.btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: #ffffff;
+      color: #0d0d0d;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: opacity 0.15s;
     }
 
-    p a {
-      color: #ffffff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    a.btn:hover { opacity: 0.85; }
+
+    p {
+      font-size: 0.85rem;
+      color: #666;
+      max-width: 28ch;
+      line-height: 1.5;
     }
   </style>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var btn = document.getElementById("openBtn");
+      var dest;
 
-      if (/iPhone/i.test(userAgent)) {
-        window.location.href = "x-safari-https://www.hailaran.es";
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        dest = "x-safari-https://www.hailaran.es";
+      } else if (/Android/i.test(ua)) {
+        dest = "intent://www.hailaran.es/#Intent;scheme=https;" +
+               "package=com.android.chrome;" +
+               "S.browser_fallback_url=https%3A%2F%2Fwww.hailaran.es;end";
       } else {
-        window.location.href = "https://www.hailaran.es";
+        dest = "https://www.hailaran.es";
       }
+
+      // Point the button at the right destination before the user taps it
+      btn.href = dest;
+
+      // Also attempt an automatic redirect (blocked by some Instagram versions)
+      window.location.href = dest;
     });
   </script>
 </head>
 <body>
   <h1>Hailaran</h1>
-  <p>
-    Si no eres redireccionado,
-    <a href="x-safari-https://www.hailaran.es">clica aquí para iPhone</a>
-    o <a href="https://www.hailaran.es">aquí para Android</a>.
-  </p>
+  <!-- href is overwritten by JS; this is the safe fallback -->
+  <a id="openBtn" href="https://www.hailaran.es" class="btn">Abrir Hailaran ↗</a>
+  <p>Toca el botón si no eres redireccionado automáticamente.</p>
 </body>
 </html>
