@@ -1,88 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hailaran</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Redirect</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the user is using an iPhone
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Hailaran" />
-  <meta property="og:description" content="Descubre Hailaran" />
-  <meta property="og:url" content="https://hailaran.es/social" />
-  <meta property="og:type" content="website" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: #0d0d0d;
-      color: #f0f0f0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 10vw, 5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-    }
-
-    a.btn {
-      display: inline-block;
-      padding: 1.1rem 2.8rem;
-      background: #ffffff;
-      color: #0d0d0d;
-      font-size: 1.2rem;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 999px;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
-      50%       { box-shadow: 0 0 0 14px rgba(255,255,255,0); }
-    }
-
-    p {
-      font-size: 0.85rem;
-      color: #555;
-      max-width: 26ch;
-      line-height: 1.5;
-    }
-  </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var ua = navigator.userAgent || navigator.vendor || window.opera;
-      var btn = document.getElementById("openBtn");
-
-      if (/iPhone|iPad|iPod/i.test(ua)) {
-        btn.href = "x-safari-https://hailaran.es";
-        window.location.href = "x-safari-https://hailaran.es";
-      } else if (/Android/i.test(ua)) {
-        var dest = "intent://hailaran.es/#Intent;scheme=https;" +
-                   "package=com.android.chrome;" +
-                   "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
-        btn.href = dest;
-        window.location.href = dest;
-      } else {
-        window.location.href = "https://hailaran.es";
-      }
-    });
-  </script>
+            if (/iPhone/i.test(userAgent)) {
+                // Redirect to the iPhone-specific URL
+                window.location.href = "x-safari-https://www.hailaran.es";
+            } else {
+                // Redirect to the generic URL
+                window.location.href = "https://www.hailaran.es";
+            }
+        });
+    </script>
 </head>
+
 <body>
-  <h1>Hailaran</h1>
-  <a id="openBtn" href="https://hailaran.es" class="btn">Abrir en Safari ↗</a>
-  <p>Toca el botón si no eres redireccionado automáticamente.</p>
+    <p>Si no eres redireccionado, <a href="x-safari-https://www.hailaran.es">clica aquí para iPhone</a> o <a
+            href="https://www.hailaran.es">aqui para Android</a>.</p>
 </body>
+
 </html>
