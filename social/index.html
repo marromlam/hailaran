@@ -23,6 +23,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 2rem;
       padding: 2rem;
       text-align: center;
     }
@@ -34,122 +35,127 @@
       color: #fff;
     }
 
-    /* ── iOS-style alert overlay ── */
-    .alert-backdrop {
+    /* --- Card shown on iOS Instagram --- */
+    #igCard {
       display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      z-index: 100;
+      gap: 1.25rem;
+      width: 100%;
+      max-width: 300px;
     }
+    #igCard.show { display: flex; }
 
-    .alert-backdrop.show { display: flex; }
-
-    .alert-box {
-      background: rgba(30,30,32,0.97);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      width: min(80vw, 290px);
-      overflow: hidden;
-      animation: popIn 0.22s cubic-bezier(0.34,1.56,0.64,1);
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.88); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    .alert-body { padding: 1.2rem 1rem 0.9rem; }
-
-    .alert-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.4rem;
-    }
-
-    .alert-msg {
-      font-size: 0.82rem;
-      color: #aaa;
-      line-height: 1.45;
-    }
-
-    .spinner {
-      display: inline-block;
-      width: 14px; height: 14px;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .alert-divider { height: 1px; background: rgba(255,255,255,0.1); }
-
-    .alert-actions { display: flex; flex-direction: column; }
-
-    .alert-btn {
-      background: none;
-      border: none;
-      color: #4da1f5;
-      font-family: inherit;
-      font-size: 0.95rem;
-      padding: 0.85rem 1rem;
-      cursor: pointer;
-      text-decoration: none;
+    .open-btn {
       display: block;
-      text-align: center;
-      transition: background 0.1s;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: #fff;
+      color: #0d0d0d;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 999px;
+      animation: pulse 1.8s ease-in-out infinite;
     }
 
-    .alert-btn:active { background: rgba(255,255,255,0.07); }
-    .alert-btn + .alert-btn { border-top: 1px solid rgba(255,255,255,0.1); }
-    .alert-btn.bold { font-weight: 700; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+      50%       { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
+    }
 
-    /* QR code */
+    .steps {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      width: 100%;
+    }
+
+    .steps-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 0.6rem;
+    }
+
+    .steps ol {
+      padding-left: 1.1rem;
+      color: #999;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .dots {
+      display: inline-block;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 0 5px;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+    }
+
+    /* copy + QR */
+    .secondary-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      width: 100%;
+    }
+
+    button.alt-btn {
+      background: none;
+      border: 1px solid #333;
+      border-radius: 999px;
+      color: #888;
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    button.alt-btn:active { border-color: #666; color: #ccc; }
+
     #qrWrap {
       display: none;
       flex-direction: column;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.9rem 1rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
     }
     #qrWrap.show { display: flex; }
-    #qrWrap p { font-size: 0.72rem; color: #888; }
+    #qrWrap span { font-size: 0.72rem; color: #555; }
     #qr img { border-radius: 8px; }
   </style>
 </head>
 <body>
   <h1>Hailaran</h1>
 
-  <!-- iOS-style alert -->
-  <div class="alert-backdrop" id="alertBackdrop">
-    <div class="alert-box">
-      <div class="alert-body">
-        <div class="alert-title">
-          <span class="spinner"></span>Abriendo en Safari
-        </div>
-        <div class="alert-msg" id="alertMsg">
-          Acepta la descarga que aparece para abrir en Safari…
-        </div>
-      </div>
-      <div class="alert-divider"></div>
-      <div class="alert-actions">
-        <a id="openLink" href="https://hailaran.es" class="alert-btn bold">Abrir ahora ↗</a>
-        <button class="alert-btn" id="copyBtn" style="display:none" onclick="copyLink()">Copiar enlace</button>
-      </div>
-      <div id="qrWrap">
-        <p>O escanea con tu cámara</p>
-        <div id="qr"></div>
-      </div>
+  <div id="igCard">
+    <!-- Primary: user-tap gesture on x-safari-https:// — real taps bypass WebView restrictions -->
+    <a id="openBtn" href="x-safari-https://hailaran.es" class="open-btn">Abrir en Safari ↗</a>
+
+    <!-- Manual fallback instructions -->
+    <div class="steps">
+      <div class="steps-label">Si el botón no funciona</div>
+      <ol>
+        <li>Toca <span class="dots">···</span> abajo a la derecha</li>
+        <li>Selecciona <strong style="color:#ddd">"Abrir en navegador externo"</strong></li>
+      </ol>
+    </div>
+
+    <div class="secondary-actions">
+      <button class="alt-btn" onclick="copyLink()">Copiar enlace</button>
+      <button class="alt-btn" id="qrToggle" onclick="showQR()">Mostrar código QR</button>
+    </div>
+
+    <div id="qrWrap">
+      <span>Escanea con la cámara</span>
+      <div id="qr"></div>
     </div>
   </div>
 
@@ -159,63 +165,40 @@
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       var isIOS       = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
       var isAndroid   = /Android/i.test(ua);
-      var isInstagram = (ua.indexOf("Instagram") > -1) || (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
-
-      var backdrop = document.getElementById("alertBackdrop");
-      var openLink = document.getElementById("openLink");
-      var copyBtn  = document.getElementById("copyBtn");
-      var alertMsg = document.getElementById("alertMsg");
-      var qrWrap   = document.getElementById("qrWrap");
+      var isInstagram = ua.indexOf("Instagram") > -1 ||
+                        ua.indexOf("FBAN") > -1 ||
+                        ua.indexOf("FBAV") > -1;
 
       if (isIOS && isInstagram) {
-        backdrop.classList.add("show");
-        openLink.href = "x-safari-https://hailaran.es";
+        // Show the card immediately — user tapping the button is a real gesture
+        // and can trigger x-safari-https:// even when programmatic redirects are blocked.
+        document.getElementById("igCard").classList.add("show");
 
-        // Primary trick: fake data: download forces iOS to offer "Open in Safari".
-        // When the user accepts, Safari opens this same /social URL.
-        // In Safari isInstagram is false, so the page auto-redirects to hailaran.es.
-        var dl = document.createElement("a");
-        dl.href = "data:application/octet-stream,";
-        dl.download = "abrir_en_safari.txt";
-        document.body.appendChild(dl);
-        dl.click();
-        document.body.removeChild(dl);
-
-        // Backup: URL schemes (Chrome then Safari)
-        window.location.href = "googlechromes://hailaran.es";
+        // Also attempt the data: download trick in the background.
+        // If iOS shows a prompt and user accepts → Safari opens /social → else branch → hailaran.es
         setTimeout(function () {
-          window.location.href = "x-safari-https://hailaran.es";
-        }, 500);
-
-        // After 2 s: if still here update copy + QR fallbacks
-        setTimeout(function () {
-          alertMsg.textContent =
-            "Toca "Abrir ahora" o usa ··· → Abrir en navegador externo.";
-          copyBtn.style.display = "block";
-          try {
-            var qr = qrcode(0, "M");
-            qr.addData("https://hailaran.es");
-            qr.make();
-            document.getElementById("qr").innerHTML = qr.createImgTag(4, 8);
-            qrWrap.classList.add("show");
-          } catch (e) {}
-        }, 2000);
+          var dl = document.createElement("a");
+          dl.href = "data:application/octet-stream,";
+          dl.download = "abrir_en_safari.txt";
+          document.body.appendChild(dl);
+          dl.click();
+          document.body.removeChild(dl);
+        }, 300);
 
       } else if (isAndroid && isInstagram) {
-        var dest = "intent://hailaran.es/#Intent;scheme=https;" +
-                   "package=com.android.chrome;" +
-                   "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
-        openLink.href = dest;
-        window.location.href = dest;
+        window.location.href =
+          "intent://hailaran.es/#Intent;scheme=https;" +
+          "package=com.android.chrome;" +
+          "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
       } else {
-        // Arrived in a real browser (e.g. Safari opened from the download prompt)
+        // Real browser (including Safari opened from the download prompt)
         window.location.href = "https://hailaran.es";
       }
     })();
 
     function copyLink() {
       var url = "https://hailaran.es";
-      var btn = document.getElementById("copyBtn");
+      var btn = event.target;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(function () { btn.textContent = "¡Enlace copiado!"; });
       } else {
@@ -226,6 +209,26 @@
         catch (e) { btn.textContent = "hailaran.es"; }
         document.body.removeChild(ta);
       }
+    }
+
+    function showQR() {
+      var wrap = document.getElementById("qrWrap");
+      var toggle = document.getElementById("qrToggle");
+      if (wrap.classList.contains("show")) {
+        wrap.classList.remove("show");
+        toggle.textContent = "Mostrar código QR";
+        return;
+      }
+      if (!document.getElementById("qr").innerHTML) {
+        try {
+          var qr = qrcode(0, "M");
+          qr.addData("https://hailaran.es");
+          qr.make();
+          document.getElementById("qr").innerHTML = qr.createImgTag(4, 8);
+        } catch (e) { return; }
+      }
+      wrap.classList.add("show");
+      toggle.textContent = "Ocultar código QR";
     }
   </script>
 </body>
