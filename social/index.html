@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hailaran</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hailaran" />
+  <meta property="og:description" content="Descubre Hailaran" />
+  <meta property="og:url" content="https://hailaran.es/social" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    /* ── iOS-style alert overlay ── */
+    .alert-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .alert-backdrop.show { display: flex; }
+
+    .alert-box {
+      background: rgba(30,30,32,0.97);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      width: min(72vw, 270px);
+      overflow: hidden;
+      animation: popIn 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .alert-body {
+      padding: 1.2rem 1rem 0.9rem;
+    }
+
+    .alert-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .alert-msg {
+      font-size: 0.82rem;
+      color: #aaa;
+      line-height: 1.45;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .alert-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .alert-actions { display: flex; flex-direction: column; }
+
+    .alert-btn {
+      background: none;
+      border: none;
+      color: #4da1f5;
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      transition: background 0.1s;
+    }
+
+    .alert-btn:active { background: rgba(255,255,255,0.07); }
+    .alert-btn + .alert-btn { border-top: 1px solid rgba(255,255,255,0.1); }
+    .alert-btn.bold { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Hailaran</h1>
+
+  <!-- iOS-style alert -->
+  <div class="alert-backdrop" id="alertBackdrop">
+    <div class="alert-box">
+      <div class="alert-body">
+        <div class="alert-title">
+          <span class="spinner"></span>Abriendo en Safari
+        </div>
+        <div class="alert-msg" id="alertMsg">
+          Intentando abrir Hailaran en tu navegador…
+        </div>
+      </div>
+      <div class="alert-divider"></div>
+      <div class="alert-actions">
+        <a id="openLink" href="https://hailaran.es" class="alert-btn bold">Abrir ahora ↗</a>
+        <button class="alert-btn" id="copyBtn" onclick="copyLink()">Copiar enlace</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isIOS       = /iPhone|iPad|iPod/i.test(ua);
+      var isAndroid   = /Android/i.test(ua);
+      var isInstagram = /Instagram/i.test(ua);
+
+      var backdrop = document.getElementById("alertBackdrop");
+      var openLink = document.getElementById("openLink");
+      var copyBtn  = document.getElementById("copyBtn");
+      var alertMsg = document.getElementById("alertMsg");
+
+      if (isIOS && isInstagram) {
+        // Show the alert immediately
+        backdrop.classList.add("show");
+        openLink.href = "x-safari-https://hailaran.es";
+        // Attempt auto-redirect
+        window.location.href = "x-safari-https://hailaran.es";
+        // After 1.5 s, update message if still here (redirect was blocked)
+        setTimeout(function () {
+          alertMsg.textContent =
+            "Instagram bloqueó la apertura automática. " +
+            "Toca "Abrir ahora" o usa ··· → Abrir en navegador externo.";
+          copyBtn.style.display = "block";
+        }, 1500);
+      } else if (isAndroid && isInstagram) {
+        var dest = "intent://hailaran.es/#Intent;scheme=https;" +
+                   "package=com.android.chrome;" +
+                   "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
+        openLink.href = dest;
+        window.location.href = dest;
+      } else {
+        window.location.href = "https://hailaran.es";
+      }
+    })();
+
+    function copyLink() {
+      var url = "https://hailaran.es";
+      var btn = document.getElementById("copyBtn");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          btn.textContent = "¡Enlace copiado!";
+        });
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = url; ta.style.cssText = "position:fixed;opacity:0";
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        try { document.execCommand("copy"); btn.textContent = "¡Enlace copiado!"; }
+        catch (e) { btn.textContent = "hailaran.es"; }
+        document.body.removeChild(ta);
+      }
+    }
+  </script>
+</body>
+</html>
