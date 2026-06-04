@@ -38,45 +38,34 @@
       font-size: 1rem;
       color: #888;
       text-align: center;
-      max-width: 28ch;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    a.btn {
-      display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: #ffffff;
-      color: #0d0d0d;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 999px;
-      transition: opacity 0.15s;
+    p a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
-
-    a.btn:hover { opacity: 0.85; }
   </style>
 
   <script>
-    (function () {
-      var dest = "https://hailaran.es";
-      var ua = navigator.userAgent || "";
+    document.addEventListener("DOMContentLoaded", function () {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-      if (/iPhone|iPad|iPod/i.test(ua)) {
-        window.location.href = "x-safari-https://hailaran.es";
-      } else if (/Android/i.test(ua)) {
-        window.location.href =
-          "intent://hailaran.es#Intent;scheme=https;package=com.android.chrome;end";
+      if (/iPhone/i.test(userAgent)) {
+        window.location.href = "x-safari-https://www.hailaran.es";
       } else {
-        window.location.href = dest;
+        window.location.href = "https://www.hailaran.es";
       }
-    })();
+    });
   </script>
 </head>
 <body>
   <h1>Hailaran</h1>
-  <p>Abriendo en tu navegador&hellip;</p>
-  <a class="btn" href="https://hailaran.es">Abrir Hailaran ↗</a>
+  <p>
+    Si no eres redireccionado,
+    <a href="x-safari-https://www.hailaran.es">clica aquí para iPhone</a>
+    o <a href="https://www.hailaran.es">aquí para Android</a>.
+  </p>
 </body>
 </html>
