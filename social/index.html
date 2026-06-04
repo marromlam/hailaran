@@ -35,7 +35,6 @@
       color: #fff;
     }
 
-    /* --- Card shown on iOS Instagram --- */
     #igCard {
       display: none;
       flex-direction: column;
@@ -99,47 +98,14 @@
       font-size: 0.9rem;
       letter-spacing: 2px;
     }
-
-    /* copy + QR */
-    .secondary-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      width: 100%;
-    }
-
-    button.alt-btn {
-      background: none;
-      border: 1px solid #333;
-      border-radius: 999px;
-      color: #888;
-      font-family: inherit;
-      font-size: 0.9rem;
-      padding: 0.7rem 1rem;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
-    }
-    button.alt-btn:active { border-color: #666; color: #ccc; }
-
-    #qrWrap {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    #qrWrap.show { display: flex; }
-    #qrWrap span { font-size: 0.72rem; color: #555; }
-    #qr img { border-radius: 8px; }
   </style>
 </head>
 <body>
   <h1>Hailaran</h1>
 
   <div id="igCard">
-    <!-- Primary: user-tap gesture on x-safari-https:// — real taps bypass WebView restrictions -->
     <a id="openBtn" href="x-safari-https://hailaran.es" class="open-btn">Abrir en Safari ↗</a>
 
-    <!-- Manual fallback instructions -->
     <div class="steps">
       <div class="steps-label">Si el botón no funciona</div>
       <ol>
@@ -147,19 +113,8 @@
         <li>Selecciona <strong style="color:#ddd">"Abrir en navegador externo"</strong></li>
       </ol>
     </div>
-
-    <div class="secondary-actions">
-      <button class="alt-btn" onclick="copyLink()">Copiar enlace</button>
-      <button class="alt-btn" id="qrToggle" onclick="showQR()">Mostrar código QR</button>
-    </div>
-
-    <div id="qrWrap">
-      <span>Escanea con la cámara</span>
-      <div id="qr"></div>
-    </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
   <script>
     (function () {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -170,12 +125,8 @@
                         ua.indexOf("FBAV") > -1;
 
       if (isIOS && isInstagram) {
-        // Show the card immediately — user tapping the button is a real gesture
-        // and can trigger x-safari-https:// even when programmatic redirects are blocked.
         document.getElementById("igCard").classList.add("show");
 
-        // Also attempt the data: download trick in the background.
-        // If iOS shows a prompt and user accepts → Safari opens /social → else branch → hailaran.es
         setTimeout(function () {
           var dl = document.createElement("a");
           dl.href = "data:application/octet-stream,";
@@ -191,45 +142,9 @@
           "package=com.android.chrome;" +
           "S.browser_fallback_url=https%3A%2F%2Fhailaran.es;end";
       } else {
-        // Real browser (including Safari opened from the download prompt)
         window.location.href = "https://hailaran.es";
       }
     })();
-
-    function copyLink() {
-      var url = "https://hailaran.es";
-      var btn = event.target;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(function () { btn.textContent = "¡Enlace copiado!"; });
-      } else {
-        var ta = document.createElement("textarea");
-        ta.value = url; ta.style.cssText = "position:fixed;opacity:0";
-        document.body.appendChild(ta); ta.focus(); ta.select();
-        try { document.execCommand("copy"); btn.textContent = "¡Enlace copiado!"; }
-        catch (e) { btn.textContent = "hailaran.es"; }
-        document.body.removeChild(ta);
-      }
-    }
-
-    function showQR() {
-      var wrap = document.getElementById("qrWrap");
-      var toggle = document.getElementById("qrToggle");
-      if (wrap.classList.contains("show")) {
-        wrap.classList.remove("show");
-        toggle.textContent = "Mostrar código QR";
-        return;
-      }
-      if (!document.getElementById("qr").innerHTML) {
-        try {
-          var qr = qrcode(0, "M");
-          qr.addData("https://hailaran.es");
-          qr.make();
-          document.getElementById("qr").innerHTML = qr.createImgTag(4, 8);
-        } catch (e) { return; }
-      }
-      wrap.classList.add("show");
-      toggle.textContent = "Ocultar código QR";
-    }
   </script>
 </body>
 </html>
